@@ -4,28 +4,14 @@ const uuidv1 = require('uuid/v1');
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
 var TodoSearch = require('TodoSearch');
+var TodoAPI = require('TodoAPI');
 
 var TodoApp = React.createClass({
   getInitialState: function() {
-    return {
-      showCompleted: false,
-      searchText: '',
-      todos: [
-        {
-          id: uuidv1(),
-          text: 'Learn Redux',
-          completed: false
-        }, {
-          id: uuidv1(),
-          text: 'Create Authentication in React',
-          completed: false
-        }, {
-          id: uuidv1(),
-          text: 'Learn MongoDB',
-          completed: true
-        }
-      ]
-    }
+    return {showCompleted: false, searchText: '', todos: TodoAPI.getTodos()}
+  },
+  componentDidUpdate: function() {
+    TodoAPI.setTodos(this.state.todos);
   },
   handleSearch: function(showCompleted, searchText) {
     this.setState({showCompleted: showCompleted, searchText: searchText.toLowerCase()});
