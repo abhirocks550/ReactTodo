@@ -1,4 +1,5 @@
 var React = require('react');
+const uuidv1 = require('uuid/v1');
 
 var TodoList = require('TodoList');
 var AddTodo = require('AddTodo');
@@ -11,13 +12,13 @@ var TodoApp = React.createClass({
       searchText: '',
       todos: [
         {
-          id: 1,
+          id: uuidv1(),
           text: 'Learn Redux'
         }, {
-          id: 2,
+          id: uuidv1(),
           text: 'Create Authentication in React'
         }, {
-          id: 3,
+          id: uuidv1(),
           text: 'Learn MongoDB'
         }
       ]
@@ -27,7 +28,14 @@ var TodoApp = React.createClass({
     this.setState({showCompleted: showCompleted, searchText: searchText.toLowerCase()});
   },
   handleAddTodo: function(text) {
-    alert('New Todo : ' + text);
+    this.setState({
+      todos: [
+        ...this.state.todos, {
+          id: uuidv1(),
+          text: text
+        }
+      ]
+    });
   },
   render: function() {
     var {
@@ -40,6 +48,6 @@ var TodoApp = React.createClass({
       <AddTodo addTodo={this.handleAddTodo}/>
     </div>);
   }
-})
+});
 
 module.exports = TodoApp;
