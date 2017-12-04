@@ -2,7 +2,7 @@ var $ = require('jQuery');
 
 module.exports = {
   setTodos: function(todos) {
-    debugger;
+    
     if ($.isArray(todos)) {
       localStorage.setItem('todos', JSON.stringify(todos));
       return todos;

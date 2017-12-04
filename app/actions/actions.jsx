@@ -18,8 +18,9 @@ export var addTodo = (text) => {
   };
 };
 
-export var toggleTodo = (text) => {
+export var toggleTodo = (id) => {
   return {
-    type: 'TOGGLE_TODO'
+    type: 'TOGGLE_TODO',
+    id:id
    };
 };
