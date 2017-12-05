@@ -1,5 +1,7 @@
-var firebase, {firebaseRef} = require('app/firebase/');
+var firebase, {firebaseRef,githubProvider} = require('app/firebase/');
 const moment = require('moment');
+
+var firebase = require('firebase');
 
 export var setSearchText = (searchText) => {
   return {
@@ -88,3 +90,21 @@ export var startToggleTodo = (id, completed) => {
     });
   }
 }
+
+export var startLoggin = () => {
+  return (dispatch,getState) => {
+    firebase.auth().signInWithPopup(githubProvider).then((result) => {
+      console.log('Auth Worked', result);
+    }, (e) =>{
+      console.log('Unable to auth ', e);
+    });
+  };
+};
+
+export var startLogout = () => {
+  return (dispatch,getState) => {
+    firebase.auth().signOut().then(() => {
+        console.log('Logged out');
+    })
+  };
+};
