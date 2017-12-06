@@ -11,8 +11,10 @@ var firebase = require('firebase');
 
 firebase.auth().onAuthStateChanged((user) => {
   if (user) {
+    store.dispatch(actions.Login(user.uid));
     hashHistory.push('/todos');
   } else {
+    store.dispatch(actions.Logout());
     hashHistory.push('/');
   }
 })
